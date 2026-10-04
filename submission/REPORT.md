@@ -1,7 +1,7 @@
 # K4-Track02-Day17 — Report cá nhân
 
 **Họ tên / MSSV:** Lê Văn Tài / 2A202602464  
-**Repo:** `https://github.com/<TEN_GITHUB>/K4-Track02-Day17-LeVanTai-2A202602464-DataPipelineEngineering` *(thay `<TEN_GITHUB>` sau khi tạo repo public)*  
+**Repo:** `https://github.com/taitottinhday/K4-Track02-Day17-LeVanTai-2A202602464-DataPipelineEngineering`  
 **Commit mã nguồn dùng để kiểm tra:** `5e3b0460faad717913712f074843d1960770bab2`  
 **AI đã dùng và phạm vi hỗ trợ:** Codex hỗ trợ đọc code, tái hiện lỗi, đề xuất/sửa code, chạy kiểm tra và soạn REPORT; em đã review các thay đổi và output.  
 **Nguồn tham khảo khác:** README, docs/RUBRIC.md và docs/SUBMISSION.md của repository bài lab.
