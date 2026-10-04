@@ -19,7 +19,6 @@ we still never modify a row that is already there.
 from __future__ import annotations
 
 import json
-import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -91,9 +90,10 @@ def land_batch(con: duckdb.DuckDBPyConnection, source: str, day: str) -> dict:
     out.parent.mkdir(parents=True, exist_ok=True)
     con.execute(f"CREATE OR REPLACE TEMP TABLE _landing ({BRONZE_COLUMNS})")
     con.executemany("INSERT INTO _landing VALUES (?, ?, ?, ?, ?, ?, ?)", rows)
-    tmp = out.with_suffix(".parquet.tmp")
-    con.execute(f"COPY _landing TO '{tmp.as_posix()}' (FORMAT parquet)")
-    os.replace(tmp, out)                       # atomic: a half-written batch never exists
+    # Let DuckDB own file publication.  A Python-level replace of a just-written
+    # Parquet file is denied by DuckDB 1.5 on Windows because COPY retains a
+    # Windows handle until the connection closes.
+    con.execute(f"COPY _landing TO '{out.as_posix()}' (FORMAT parquet)")
     con.execute("DROP TABLE _landing")
     return {"source": source, "day": day, "status": "landed", "rows": len(rows)}
 
